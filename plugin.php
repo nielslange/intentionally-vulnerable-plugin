@@ -25,6 +25,8 @@ if ( defined( 'LOAD_INTENTIONAL_VULNS' ) && LOAD_INTENTIONAL_VULNS ) {
 }
 
 function dvp_install() {
+	global $wpdb;
+	
 	$sql = "CREATE TABLE {$wpdb->prefix}login_audit (
 		ID bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 		login varchar(200) NOT NULL default '',
