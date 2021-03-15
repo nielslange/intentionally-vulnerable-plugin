@@ -32,7 +32,7 @@ add_filter( 'wp_authenticate_user', 'dvp_check_login', 10, 2 );
  * @param WP_User $user
  * @param string  $pass
  */
-function dvp_log_failed_login( $user, $pass ) {
+function dvp_log_failed_login( WP_User $user, string $pass ) {
 	global $wpdb;
 
 	$login = sanitize_user( $user->user_login, true );
