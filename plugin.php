@@ -11,6 +11,8 @@
 * DO NOT RUN THIS PLUGIN ON AN INTERNET ACCESSIBLE SITE
 */
 
+define( 'LOAD_INTENTIONAL_VULNS', 'i-know-what-i-am-doing' );
+
 function dvp_admin_safety_notice() {
 	echo '<div class="error"><p><strong>WARNING:</strong> Damn Vulnerable WordPress Plugin contains
 				intentional security issues and should only be run on local development machines.</p></div>';
