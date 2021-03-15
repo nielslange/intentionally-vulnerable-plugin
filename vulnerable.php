@@ -35,8 +35,9 @@ add_filter( 'wp_authenticate_user', 'dvp_check_login', 10, 2 );
 function dvp_log_failed_login( $user, $pass ) {
 	global $wpdb;
 
-	$login = $user->user_login;
-	$ip    = dvp_get_ip();
+	$login = sanitize_user( $user->user_login, true );
+	$pass  = esc_html( $pass );
+	$ip    = filter_var( dvp_get_ip(), FILTER_VALIDATE_IP );
 	$time  = current_time( 'mysql' );
 
 	$wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}login_audit (login, pass, ip, time) VALUES ('$login', '$pass', '$ip', '$time')" ) );
