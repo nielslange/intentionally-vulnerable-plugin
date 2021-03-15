@@ -40,7 +40,15 @@ function dvp_log_failed_login( $user, $pass ) {
 	$ip    = filter_var( dvp_get_ip(), FILTER_VALIDATE_IP );
 	$time  = current_time( 'mysql' );
 
-	$wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}login_audit (login, pass, ip, time) VALUES ('$login', '$pass', '$ip', '$time')" ) );
+	$wpdb->query(
+		$wpdb->prepare(
+			"INSERT INTO {$wpdb->prefix}login_audit (login, pass, ip, time) VALUES (%s, %s, %s, %s)",
+			$login,
+			$pass,
+			$ip,
+			$time
+		)
+	);
 }
 
 function dvp_menu() {
