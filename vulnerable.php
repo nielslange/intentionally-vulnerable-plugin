@@ -70,7 +70,7 @@ function dvp_admin() {
 // Display all failed login attempts + options form
 function dvp_view_all_logs() {
 	global $wpdb;
-	$logs = $wpdb->get_results( 'SELECT * FROM {$wpdb->prefix}login_audit', ARRAY_A );
+	$logs = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}login_audit", ARRAY_A );
 
 	echo '<h2>Failed logins</h2>';
 
@@ -108,7 +108,7 @@ function dvp_view_all_logs() {
 function dvp_view_log( $id ) {
 	global $wpdb;
 
-	$log = $wpdb->get_row( 'SELECT * FROM {$wpdb->prefix}login_audit WHERE ID = ' . esc_sql( $id ), ARRAY_A );
+	$log = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}login_audit WHERE ID = " . esc_sql( $id ), ARRAY_A );
 
 	echo '<h2>Failed login #' . $id . '</h2>';
 
