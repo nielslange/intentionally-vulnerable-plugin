@@ -39,7 +39,7 @@ function dvp_log_failed_login( $user, $pass ) {
 	$ip    = dvp_get_ip();
 	$time  = current_time( 'mysql' );
 
-	$wpdb->query( $wpdb->prepare( "INSERT INTO login_audit (login, pass, ip, time) VALUES ('$login', '$pass', '$ip', '$time')" ) );
+	$wpdb->query( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}login_audit (login, pass, ip, time) VALUES ('$login', '$pass', '$ip', '$time')" ) );
 }
 
 function dvp_menu() {
@@ -61,7 +61,7 @@ function dvp_admin() {
 // Display all failed login attempts + options form
 function dvp_view_all_logs() {
 	global $wpdb;
-	$logs = $wpdb->get_results( 'SELECT * FROM login_audit', ARRAY_A );
+	$logs = $wpdb->get_results( 'SELECT * FROM {$wpdb->prefix}login_audit', ARRAY_A );
 
 	echo '<h2>Failed logins</h2>';
 
@@ -99,7 +99,7 @@ function dvp_view_all_logs() {
 function dvp_view_log( $id ) {
 	global $wpdb;
 
-	$log = $wpdb->get_row( 'SELECT * FROM login_audit WHERE ID = ' . esc_sql( $id ), ARRAY_A );
+	$log = $wpdb->get_row( 'SELECT * FROM {$wpdb->prefix}login_audit WHERE ID = ' . esc_sql( $id ), ARRAY_A );
 
 	echo '<h2>Failed login #' . $id . '</h2>';
 
@@ -124,7 +124,7 @@ function dvp_delete_log() {
 
 	if ( isset( $_POST['id'] ) ) {
 		global $wpdb;
-		$wpdb->query( 'DELETE FROM login_audit WHERE ID = ' . esc_sql( $_POST['id'] ) );
+		$wpdb->query( 'DELETE FROM {$wpdb->prefix}login_audit WHERE ID = ' . esc_sql( $_POST['id'] ) );
 	}
 
 	wp_redirect( $_REQUEST['redirect'] );
