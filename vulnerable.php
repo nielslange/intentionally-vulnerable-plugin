@@ -105,7 +105,7 @@ function dvp_view_all_logs() {
 }
 
 // Display a single failed attempt with a form to delete the entry
-function dvp_view_log( $id ) {
+function dvp_view_log( int $id ) {
 	global $wpdb;
 
 	$log = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}login_audit WHERE ID = " . esc_sql( $id ), ARRAY_A );
